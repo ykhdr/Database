@@ -8,16 +8,17 @@ WHERE publishers.name = ?;
 -- Поиск всех изданий, в которых печатается указанный автор
 SELECT publications.name
 FROM articles
-         JOIN public.article_publications ap ON articles.id = ap.article_id
+         JOIN public.articles_publications ap ON articles.id = ap.article_id
          JOIN publications ON ap.publication_id = publications.id
 WHERE articles.author = ?;
 
 -- Подсчет числа всех статей, написанных авторами за указанный срок
 -- Date format : 'YYYY-MM-DD'
 SELECT count(ap.article_id)
-FROM publishers_publications
-         JOIN public.publications p on p.id = publishers_publications.publication_id
-         JOIN public.article_publications ap on p.id = ap.publication_id
+FROM publication_issues
+         JOIN publishers_publications pp on pp.publication_id = publication_issues.publication_id
+         JOIN public.publications p on p.id = pp.publication_id
+         JOIN public.articles_publications ap on p.id = ap.publication_id
 WHERE publication_date >= ?
   and publication_date <= ?;
 
