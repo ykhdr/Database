@@ -21,7 +21,7 @@ CREATE TABLE Publishers_Publications
 CREATE TABLE Publication_issues
 (
 	publication_id	 bigint REFERENCES Publications (id) ON DELETE CASCADE ,
-	issue_number	 int NOT NULL,
+	issue_number	 int NOT NULL CHECK (issue_number >= 0),
 	publication_date date,
 	PRIMARY KEY (publication_id, issue_number)
 );
