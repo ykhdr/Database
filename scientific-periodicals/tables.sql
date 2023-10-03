@@ -13,14 +13,14 @@ CREATE TABLE Publications
 
 CREATE TABLE Publishers_Publications
 (
-    publisher_id     bigint REFERENCES Publishers (id),
-    publication_id   bigint REFERENCES Publications (id),
+    publisher_id     bigint REFERENCES Publishers (id) ON DELETE CASCADE ,
+    publication_id   bigint REFERENCES Publications (id) ON DELETE CASCADE ,
     PRIMARY KEY (publisher_id, publication_id)
 );
 
 CREATE TABLE Publication_issues
 (
-	publication_id	 bigint REFERENCES Publications (id),
+	publication_id	 bigint REFERENCES Publications (id) ON DELETE CASCADE ,
 	issue_number	 int NOT NULL,
 	publication_date date,
 	PRIMARY KEY (publication_id, issue_number)
@@ -36,7 +36,7 @@ CREATE TABLE Articles
 
 CREATE TABLE Articles_Publications
 (
-    article_id     bigint REFERENCES Articles (id),
-    publication_id bigint REFERENCES Publications (id),
+    article_id     bigint REFERENCES Articles (id) ON DELETE CASCADE ,
+    publication_id bigint REFERENCES Publications (id) ON DELETE CASCADE ,
     PRIMARY KEY (article_id, publication_id)
 );
